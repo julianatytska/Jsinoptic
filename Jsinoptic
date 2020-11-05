@@ -1,7 +1,16 @@
 import pyowm
+from pyowm.utils import config
+from pyowm.utils import timestamps
 owm = pyowm.OWM('1998b4509011096c711af239d96e2a01')
+mgr = owm.weather_manager()
 place = input('Enter your city or country:')
-observation = owm.weather2_at_place(place)
-g = observation.get_weather()
-temp = g.get_tempeerature('celsius')
-print('In city' + place + "now is" + g.get_detailed_status())
+observation = mgr.weather_at_place(place)
+w = observation.weather
+temp = w.temperature('celsius')["temp"]
+print('In ' + place + ' now is ' + str(w.detailed_status) + str(w.temperature('celsius')) + str(w.rain))
+if temp < 0:
+    print("It`s too cold! Stay at home!")
+if temp > 0 < 15:
+    print("Wear warm clothes.It`s cold!")
+if temp > 15:
+    print("Weather is nice.You should go for a walk")
