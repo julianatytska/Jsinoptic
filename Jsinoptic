@@ -1,0 +1,7 @@
+import pyowm
+owm = pyowm.OWM('1998b4509011096c711af239d96e2a01')
+place = input('Enter your city or country:')
+observation = owm.weather2_at_place(place)
+g = observation.get_weather()
+temp = g.get_tempeerature('celsius')
+print('In city' + place + "now is" + g.get_detailed_status())
